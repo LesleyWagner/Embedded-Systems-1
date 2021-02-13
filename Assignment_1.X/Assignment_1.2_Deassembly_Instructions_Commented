@@ -1,0 +1,19 @@
+!int main( void ) {
+0x9D0001FC: ADDIU SP, SP, -8 // allocate 8 bytes on the stack
+0x9D000200: SW FP, 4(SP) // Save frame pointer
+0x9D000204: ADDU FP, SP, ZERO // Set frame pointer register to current value of stack pointer register
+!    TRISA = 0; // pinMode(OUTPUT)
+0x9D000208: LUI V0, -16504 // load a value of -16504 in upper two bytes of register v0, the lower 2 bytes are zeros. Hex value = 0xBF880000.
+0x9D00020C: SW ZERO, 24592(V0) // Set memory address V0 + 24592(dec) = 0xBF886010 to a value of 0. 
+!    LATA = 0xFF; // Turn on all leds
+0x9D000210: LUI V0, -16504 // load a value of -16504 in upper two bytes of register v0, the lower 2 bytes are zeros. Hex value = 0xBF880000.
+0x9D000214: ADDIU V1, ZERO, 255 // Set register V1 to a value of 255
+0x9D000218: SW V1, 24624(V0) // Set memory address V0 + 24624(dec) = 0BF886030 to a value of 255 (all bits to 1). 
+!    return 1;
+0x9D00021C: ADDIU V0, ZERO, 1 // Set V0 register to 1.
+!}
+0x9D000220: ADDU SP, FP, ZERO // Set stack pointer register to value of frame pointer register
+0x9D000224: LW FP, 4(SP) // load the previous value of the frame pointer from memory address stack pointer + 4
+0x9D000228: ADDIU SP, SP, 8 // Free up 8 bytes on the stack
+0x9D00022C: JR RA // Jump to the instruction address contained in register RA
+0x9D000230: NOP // No operation

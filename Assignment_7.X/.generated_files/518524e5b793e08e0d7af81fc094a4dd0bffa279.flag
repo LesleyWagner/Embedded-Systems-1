@@ -1,0 +1,1 @@
+ $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)    C:\Users\lesle\Documents\Embedded_Systems_Assignments\Assignment_7.X\lcd.c

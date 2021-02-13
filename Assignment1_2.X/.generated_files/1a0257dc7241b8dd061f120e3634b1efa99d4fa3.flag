@@ -1,0 +1,1 @@
+ $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"inc"   -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)    C:\Users\lesle\Documents\Embedded_Systems_Assignments\Assignment1_2.X\src\assignment1_2.c

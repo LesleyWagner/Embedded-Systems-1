@@ -1,0 +1,33 @@
+!int main( void )
+!{
+0x9D0000DC: ADDIU SP, SP, -40 // allocate 40 bytes on the stack
+0x9D0000E0: SW RA, 36(SP) // Save value of return address to memory address stack pointer + 36
+0x9D0000E4: SW FP, 32(SP) // Save value of frame pointer to memory address stack pointer + 32
+0x9D0000E8: ADDU FP, SP, ZERO // Set frame pointer register to current value of stack pointer register
+!    int a = 4;
+0x9D0000EC: ADDIU V0, ZERO, 4 // Set register V0 to 4
+0x9D0000F0: SW V0, 16(FP) // Save a value of 4 to memory address stack pointer + 16
+!    int b = 12;
+0x9D0000F4: ADDIU V0, ZERO, 12 // Set register V0 to 12
+0x9D0000F8: SW V0, 20(FP) // Save a value of 12 to memory address stack pointer + 20
+!    int c;
+!    
+!    /* ---------------------------------------------------------------------- */
+!    /* call the addnumbers function and add a and b into c                    */
+!    /* ---------------------------------------------------------------------- */
+!    c = addnumbers( a, b ); 
+0x9D0000FC: LW A0, 16(FP) // load value at memory address stack pointer + 16 (4) to first function argument register A0
+0x9D000100: LW A1, 20(FP) // load value at memory address stack pointer + 20 (12) to second function argument register A1
+0x9D000104: JAL addnumbers // jumps to instruction address for function addnumbers and saves return address to register RA
+0x9D000108: NOP // no operation 
+0x9D00010C: SW V0, 24(FP) // Save return value to memory address frame pointer + 24
+!    
+!    return 1;
+0x9D000110: ADDIU V0, ZERO, 1 // Set V0 return register to 1.
+!}
+0x9D000114: ADDU SP, FP, ZERO // Set stack pointer register to value of frame pointer register
+0x9D000118: LW RA, 36(SP) // load the previous value of the return address from memory address stack pointer + 36
+0x9D00011C: LW FP, 32(SP) // load the previous value of the frame pointer from memory address stack pointer + 32
+0x9D000120: ADDIU SP, SP, 40 // Free up 40 bytes on the stack
+0x9D000124: JR RA // jump to the instruction in the return address register
+0x9D000128: NOP // no operation

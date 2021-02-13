@@ -24,49 +24,48 @@
 /* global variables.                                                          */
 /* -------------------------------------------------------------------------- */
 
-int readSwitch0();
+/* -------------------------------------------------------------------------- */
+/* local function prototypes.                                                 */
+/* -------------------------------------------------------------------------- */
+int addnumbers
+(
+    int a,
+    int b
+);
+
 /* -------------------------------------------------------------------------- */
 /* main function.                                                             */
 /* -------------------------------------------------------------------------- */
-int main( void ) {
-    setTimer2();
-    TRISA = 0x00;
-    LATA = 0;
+int main( void )
+{
+    int a = 4;
+    int b = 12;
+    int c;
     
-    while (1) {
-        if (TMR2 > 50000) {
-            TMR2 = 0;
-            LATA++;
-        }
-    }
+    /* ---------------------------------------------------------------------- */
+    /* call the addnumbers function and add a and b into c                    */
+    /* ---------------------------------------------------------------------- */
+    c = addnumbers( a, b ); 
+    
     return 1;
 }
 
-char switch0Prev = 0;
-int readSwitch0() {
-    if (switch0Prev == 0) {
-        if (prt_SWT_SWT0 == 1) {
-            switch0Prev = 1;
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-    else {
-        if (prt_SWT_SWT0 == 1) {
-            return 0;
-        }
-        else {
-            switch0Prev = 0;
-            return 0;
-        }
-    }
-}
+/* ========================================================================== */
+/* function: addnumbers( a, b );                                              */
+/*                                                                            */
+/* description: adds two integer numbers, a and b, and returns the result.    */
+/*                                                                            */
+/* pre:  a - an integer value to be added to b                                */
+/*       b - an integer value to be added to a                                */
+/*                                                                            */
+/* post: return value - the integer sum of a and b                            */
+/* ========================================================================== */
 
-void setTimer2() {
-    T2CONbits.TCS = 0; // clock source is internal
-    T2CONbits.T32 = 0; // 16 bit mode is used
-    T2CONbits.TCKPS = 0b111; // 256 clock divider, 156250 Hz frequency
-    T2CONbits.ON = 1;
-}
+int addnumbers
+(
+    int a,
+    int b
+)
+{
+    return a << b;
+}    
